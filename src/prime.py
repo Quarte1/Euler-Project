@@ -7,32 +7,44 @@ Find prime numbers
 '''
 
 
+class Prime(object):
 
-def prime_list_under(limit):
-    
-    prime_list = [2,3]
-    for i in range(3, limit+1):
-        if is_prime(prime_list, i):
-            prime_list.append(i)
-    
-    return prime_list
-    
-    
-def is_prime(prime_list, i):
-    if i == 2:
-        return True 
-    elif i % 2 == 0:
-        return False
-    else :
-        for prime in prime_list:
-            if i % prime == 0 :
-                return False
-    return True
+    def __init__(self):
+        self.prime_list = [2,3]
 
-def prime_biggest_under(limit):
-    primes = prime_list_under(limit)
-    return primes[-1]
+    def list_under(self, limit):
+    
+        for i in range(3, limit+1, 2):
+            if self.is_prime(self.prime_list, i):
+                if i not in self.prime_list :
+                    self.prime_list.append(i)
+    
+        return self.prime_list
+        
+        
+    def is_prime(self, prime_list, i):
+        if i == 2:
+            return True 
+        elif i % 2 == 0:
+            return False
+        else :
+            for prime in prime_list:
+                if i % prime == 0 :
+                    return False
+        return True
+    
+    
+    def biggest_under(self, limit):
+        primes = self.list_under(limit)
+        return primes[-1]
+    
+    
+    def get_by(self, number):
+        
+     
+        return self.prime_list
 
 if __name__ == "__main__":
-    prime_list_under(100)
-    prime_biggest_under(100)
+    prime = Prime()
+    print prime.list_under(100000)
+#     biggest_under(100)
