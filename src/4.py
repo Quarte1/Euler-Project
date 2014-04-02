@@ -12,8 +12,6 @@ Solution: 906609
 
 @author: Ungsik Yun
 '''
-from distutils.tests.setuptools_build_ext import if_dl
-from operator import is_
 
 def is_palindrome(i):
     stringed = str(i)
