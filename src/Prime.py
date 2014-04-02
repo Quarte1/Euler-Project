@@ -34,6 +34,17 @@ class Prime(object):
                 if i % prime == 0 :
                     return False
         return True
+
+        
+    def is_prime2(self, target):
+        if target == 2:
+            return True
+        
+        for i in range(3, target
+                       , 2):
+            if target % i == 0:
+                return False
+        return True
     
     
     def biggest_under(self, limit):
@@ -58,5 +69,7 @@ class Prime(object):
     
 if __name__ == "__main__":
     prime = Prime()
-    print prime.get_by(10000)
-    print len(prime.prime_list)
+    print prime.is_prime2(3)
+    print prime.is_prime2(31)
+    print prime.is_prime2(30)
+    print prime.is_prime2(19)
