@@ -5,25 +5,37 @@ Find prime numbers
 
 @author: Ungsik Yun
 '''
+from math import sqrt, floor
+import datetime
 
 class Prime(object):
 
     def __init__(self):
-        self.prime_list = [2,3]
+        self.prime_list = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
     def list_under(self, limit):
-    
-        for i in range(3, limit+1, 2):
+        for i in xrange(101, limit+1, 2):
             if self.is_prime(i):
                 if i not in self.prime_list :
                     self.prime_list.append(i)
         result = []
-        for j in self.prime_list:
-            if j < limit:
-                result.append(j)
+        for i1 in self.prime_list:
+            if i1 < limit:
+                result.append(i1)
             else:
                 break
         return result
+    
+    def list_under_improved(self, limit):
+        for i in xrange(102, limit+1, 6):
+            i1, i2 = i - 1, i + 1
+            if self.is_prime2(i1):
+                if i1 not in self.prime_list :
+                    self.prime_list.append(i1)
+            if self.is_prime2(i2):
+                if i2 not in self.prime_list :
+                    self.prime_list.append(i2)
+        return self.prime_list
         
         
     def is_prime(self, i):
@@ -37,19 +49,14 @@ class Prime(object):
 
         
     def is_prime2(self, target):
-        if target == 2:
+        if target in self.prime_list:
             return True
-        
-        for i in range(3, target
-                       , 2):
-            if target % i == 0:
-                return False
-        return True
-    
-    
-    def biggest_under(self, limit):
-        primes = self.list_under(limit)
-        return primes[-1]
+        else:
+            divider =  int(sqrt(target)) + 1
+            for i in xrange(2, divider):
+                if target % i == 0:
+                    return False
+            return True
     
     
     def get_by(self, stop):
@@ -69,7 +76,9 @@ class Prime(object):
     
 if __name__ == "__main__":
     prime = Prime()
-    print prime.is_prime2(3)
-    print prime.is_prime2(31)
-    print prime.is_prime2(30)
-    print prime.is_prime2(19)
+    a = datetime.datetime.now()
+    print prime.list_under_improved(100000)
+    b = datetime.datetime.now()
+    print b - a
+    
+
