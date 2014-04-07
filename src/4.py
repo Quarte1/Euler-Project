@@ -20,6 +20,9 @@ def is_palindrome(i):
             return False
             break
     return True
+
+def is_palindrome_improved(i):
+    return str(i) == str(i)[::-1]
         
 def get_largest_2_3digit_multifled_pelindrome():
     pelindrome_list = []
@@ -29,7 +32,7 @@ def get_largest_2_3digit_multifled_pelindrome():
         j = 999
         while j > 100:
 #             print i,j
-            if is_palindrome(i*j):
+            if is_palindrome_improved(i*j):
                 pelindrome_list.append(i*j)
             j -= 1
         i -= 1
