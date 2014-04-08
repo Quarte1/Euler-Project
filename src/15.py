@@ -22,4 +22,6 @@ if __name__ == '__main__':
             matrix[line][i] = matrix[line][i-1] + matrix[line-1][i]
     
     for i in matrix:
-        print i
+        for j in i:
+            print "%13d"%j,
+        print
