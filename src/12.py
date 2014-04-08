@@ -23,6 +23,7 @@ What is the value of the first triangle number to have over five hundred divisor
 @author: Alice
 '''
 import multiprocessing
+from math import sqrt
 
 def worker(step, total_process_number, target, result_queue):
     base = 1
@@ -43,9 +44,9 @@ def get_nth_triangle_number(n):
     
 def get_divisor_number(n):
     divisor_counter = 0
-    for i in xrange(1, n + 1):
+    for i in xrange(1, int(sqrt(n + 1))):
             if n % i == 0:
-                divisor_counter += 1
+                divisor_counter += 2
     return divisor_counter
 
 if __name__ == '__main__':
