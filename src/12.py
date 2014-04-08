@@ -22,29 +22,49 @@ What is the value of the first triangle number to have over five hundred divisor
 
 @author: Alice
 '''
+import multiprocessing
+
+def worker(step, total_process_number, target, result_queue):
+    base = 1
+    name = multiprocessing.current_process().name
+    
+    while True:
+        n = base + step
+        nth = get_nth_triangle_number(n)
+        if get_divisor_number(nth) > target:
+            result_queue.put(nth)
+            print name, " find solution :", nth
+            return
+        else:
+            base += total_process_number 
+
+def get_nth_triangle_number(n):
+    return (n * (n + 1))/2
+    
+def get_divisor_number(n):
+    divisor_counter = 0
+    for i in xrange(1, n + 1):
+            if n % i == 0:
+                divisor_counter += 1
+    return divisor_counter
 
 if __name__ == '__main__':
-    from Triangle import Triangle
-    
-    t = Triangle()
-    find = False
-    n = 1
-    divisor_counter = 0
-    divisor_list = []
-    nth = 0
     target = 500
+
+    result_queue = multiprocessing.Queue()
+    process_number = multiprocessing.cpu_count()
     
-    while not find:
-        nth = t.get_nth(n)
-        for i in xrange(1, nth + 1):
-            if nth % i == 0:
-                divisor_counter += 1
-#                 divisor_list.append(i)
-        if len(divisor_list) > target:
-            find = True
-        else:
-            n += 1
-            divisor_counter = 0
-#             divisor_list = []
+    workers = [multiprocessing.Process(target=worker,
+                                       name=str(i),
+                                       args=(i, process_number, target, result_queue))
+               for i in xrange(process_number) ]
         
-    print nth, divisor_counter            
+    for i in workers:
+        i.start()
+    for j in workers:
+        j.join()
+    
+    num_workers = process_number
+    while num_workers:
+        print result_queue.get()
+        num_workers -= 1
