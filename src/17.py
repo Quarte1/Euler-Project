@@ -14,7 +14,6 @@ The use of "and" when writing out numbers is in compliance with British usage.
 
 @author: Alice
 '''
-import re
 
 
 def get_word_from_number(n):
@@ -64,25 +63,31 @@ def get_word_from_number(n):
                 stringed += '-'
                 stringed += words[n % 10]
             break
-        elif n > 100:
+        elif n >= 100:
             stringed += words[n / divisor]
             if i > 1:
                 stringed += ' ' + words[divisor]
                 if n % divisor > 0:
-                    stringed += ' '
-                    if n % divisor > 10:
-                        stringed += 'and '
+                    stringed += ' and '
+#                     if n % divisor > 10:
+#                         stringed += 'and '
         n = n % divisor
 
     return stringed
 
+
 def get_alphabet_number(s):
     return len(s.replace(' ', '').replace('-', ''))
 
-if __name__ == '__main__':
-    target = 1000
+
+def get_alphaber_sum_under(target):
     result = 0
     for i in xrange(1, target + 1):
-        print "%4d: %2d, %s" % (i, get_alphabet_number(get_word_from_number(i)), get_word_from_number(i))
+        print "%4d: %2d, %s" % (i,
+                                get_alphabet_number(get_word_from_number(i)),
+                                get_word_from_number(i))
         result += get_alphabet_number(get_word_from_number(i))
-    print result
+    return result
+
+if __name__ == '__main__':
+    print get_alphaber_sum_under(1000)
