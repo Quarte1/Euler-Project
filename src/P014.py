@@ -21,21 +21,22 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 @author: Alice
 '''
 
+
 def create_callatz_sequence(seed):
     l = []
     n = seed
-    
+
     l.append(seed)
     while n > 1:
-        if n%2 == 0:
+        if n % 2 == 0:
             n /= 2
         else:
             n = 3 * n + 1
         l.append(n)
     return l
-        
+
 if __name__ == '__main__':
     target = 1000000
-    d = {i : len(create_callatz_sequence(i)) for i in xrange(target, 1, -1)}
-    k = max(d, key=d.get)
+    d = {i: len(create_callatz_sequence(i)) for i in xrange(target, 1, -1)}
+    k = max(d, key = d.get)
     print k, d[k]
