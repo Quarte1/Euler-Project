@@ -18,12 +18,10 @@ I can get a & b from below iteration. than can calculate c.
 @author: Alice
 '''
 
-
-
 if __name__ == '__main__':
     from math import sqrt
-    
-    a,b = 0,0
+
+    a, b = 0, 0
     target = 500000
     has_found = False
     while b < 1000 and not has_found:
@@ -31,9 +29,9 @@ if __name__ == '__main__':
         b += 1
         while a < b and not has_found:
             a += 1
-            if target == 1000*a + 1000*b - a*b:
-                print a,b
+            if target == 1000 * a + 1000 * b - a * b:
+                print a, b
                 has_found = True
-    c_square = a**2 + b**2
+    c_square = a ** 2 + b ** 2
     c = sqrt(c_square)
-    print a,b,c,a+b+c, a*b*c
+    print a, b, c, a + b + c, a * b * c

@@ -14,14 +14,14 @@ How many such routes are there through a 20*20 grid?
 
 if __name__ == '__main__':
     n, m = 20, 20
-    matrix = [[1 for i in xrange(n+1)] for j in xrange(m+1)]
+    matrix = [[1 for i in xrange(n + 1)] for j in xrange(m + 1)]
 
-    #calculate
-    for line in xrange(1, m+1):
-        for i in xrange(1, n+1):
-            matrix[line][i] = matrix[line][i-1] + matrix[line-1][i]
-    
+    # calculate
+    for line in xrange(1, m + 1):
+        for i in xrange(1, n + 1):
+            matrix[line][i] = matrix[line][i - 1] + matrix[line - 1][i]
+
     for i in matrix:
         for j in i:
-            print "%13d"%j,
+            print "%13d" % j,
         print
