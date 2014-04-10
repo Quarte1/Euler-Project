@@ -69,8 +69,6 @@ def get_word_from_number(n):
                 stringed += ' ' + words[divisor]
                 if n % divisor > 0:
                     stringed += ' and '
-#                     if n % divisor > 10:
-#                         stringed += 'and '
         n = n % divisor
 
     return stringed
@@ -83,9 +81,6 @@ def get_alphabet_number(s):
 def get_alphaber_sum_under(target):
     result = 0
     for i in xrange(1, target + 1):
-        print "%4d: %2d, %s" % (i,
-                                get_alphabet_number(get_word_from_number(i)),
-                                get_word_from_number(i))
         result += get_alphabet_number(get_word_from_number(i))
     return result
 
