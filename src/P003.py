@@ -13,18 +13,20 @@ Solution: just brute force. select 10000 prime number from 2, than try divide. i
 '''
 
 import Prime
+
+
 def get_lagerst_prime_factor(target):
-    
-    factors =[]
+
+    factors = []
     p = Prime.Prime()
     primes_temp = p.list_under(10000)
 #     primes = list_under(target)
-    
-    for prime in primes_temp :
-        if target % prime == 0 :
+
+    for prime in primes_temp:
+        if target % prime == 0:
             target = target / prime
             factors.append(prime)
-    
+
     return factors
 
 if __name__ == "__main__":
