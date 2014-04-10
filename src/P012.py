@@ -25,10 +25,11 @@ What is the value of the first triangle number to have over five hundred divisor
 import multiprocessing
 from math import sqrt
 
+
 def worker(step, total_process_number, target, result_queue):
     base = 1
     name = multiprocessing.current_process().name
-    
+
     while True:
         n = base + step
         nth = get_nth_triangle_number(n)
@@ -37,11 +38,13 @@ def worker(step, total_process_number, target, result_queue):
             print name, " find solution :", nth
             return
         else:
-            base += total_process_number 
+            base += total_process_number
+
 
 def get_nth_triangle_number(n):
-    return (n * (n + 1))/2
-    
+    return (n * (n + 1)) / 2
+
+
 def get_divisor_number(n):
     divisor_counter = 0
     for i in xrange(1, int(sqrt(n + 1))):
@@ -54,17 +57,17 @@ if __name__ == '__main__':
 
     result_queue = multiprocessing.Queue()
     process_number = multiprocessing.cpu_count()
-    
-    workers = [multiprocessing.Process(target=worker,
-                                       name=str(i),
-                                       args=(i, process_number, target, result_queue))
-               for i in xrange(process_number) ]
-        
+
+    workers = [multiprocessing.Process(target = worker,
+                                       name = str(i),
+                                       args = (i, process_number, target, result_queue))
+               for i in xrange(process_number)]
+
     for i in workers:
         i.start()
     for j in workers:
         j.join()
-    
+
     num_workers = process_number
     while num_workers:
         print result_queue.get()
